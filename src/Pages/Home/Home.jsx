@@ -1,44 +1,73 @@
-import React from "react";
-import UserCard from "../../components/UserCard/UserCard";
+import { useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { FaFacebook, FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { init } from "ityped";
+
+import Photo from "../../images/men.jpg";
+
+import "./home.scss";
 
 function Home() {
-  const users = [
-    {
-      name: "John Doe",
-      age: 15,
-    },
-    {
-      name: "Masha Doe",
-      age: 18,
-    },
-    {
-      name: "Pete Doe",
-      age: 150,
-    },
-    {
-      name: "Hello",
-      age: 150,
-    },
-    {
-      name: "Hello",
-      age: 160,
-    },
-  ];
+  const animatedTextRef = useRef();
+
+  useEffect(() => {
+    init(animatedTextRef.current, {
+      showCursor: true,
+      strings: ["Frontend React Developer"],
+      backDelay: 1500,
+      backSpeed: 60,
+    });
+  }, []);
+
   return (
     <section className="home">
-      <div className="container">
-        <h1>About Page</h1>
-        <h2>Our Users</h2>
-        <div className="container">
-          {users.map((user, idx) => {
-            return (
-              <UserCard
-                userName={user.name}
-                userAge={user.age}
-                key={`${idx}-${user.name}`}
-              />
-            );
-          })}
+      <div className="container home__container">
+        <div className="home__left">
+          <h1 className="home__title">Hero Coder</h1>
+          <p className="home__subtitle">
+            <span ref={animatedTextRef}></span>
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod velit
+            omnis at ipsa, sed reiciendis explicabo doloremque, error aliquam
+            earum laborum libero soluta architecto recusandae unde in, labore
+            delectus rerum.
+          </p>
+          <ul className="home__links">
+            <li>
+              <a
+                href="https://fb.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaFacebook className="home__icon" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub className="home__icon" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedinIn className="home__icon" />
+              </a>
+            </li>
+          </ul>
+          <Link to="/contact" className="home__cta">
+            Hire Me
+          </Link>
+        </div>
+        <div className="home__right">
+          <img src={Photo} alt="Hero Coder" />
         </div>
       </div>
     </section>
